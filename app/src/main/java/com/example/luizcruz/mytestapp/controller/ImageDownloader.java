@@ -1,6 +1,5 @@
 package com.example.luizcruz.mytestapp.controller;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -29,7 +28,7 @@ public class ImageDownloader extends AsyncTask<String, String, Bitmap> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        img = (ImageView) rootView.findViewById(R.id.productImg);
+        img = (ImageView) rootView;
     }
 
     protected Bitmap doInBackground(String... args) {

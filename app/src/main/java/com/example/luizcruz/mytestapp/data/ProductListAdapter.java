@@ -26,6 +26,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTxtName, mTxtPriceFrom, mTxtPriceTo;
         public ImageView imgProductIcon;
+        public String imgUrl;
 
         public ViewHolder(View v) {
             super(v);
@@ -33,8 +34,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             mTxtPriceFrom = (TextView) v.findViewById(R.id.txtPriceFrom);
             mTxtPriceTo = (TextView) v.findViewById(R.id.txtPriceTo);
             imgProductIcon = (ImageView) v.findViewById(R.id.productImg);
-
-            new ImageDownloader(v).execute("http://imagens.americanas.com.br/produtos/01/00/item/116779/9/116779925P1.jpg");
         }
 
     }
@@ -65,6 +64,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.mTxtName.setText(productVO.name);
         holder.mTxtPriceFrom.setText( "R$ " + productVO.priceFrom.toString());
         holder.mTxtPriceTo.setText("R$ " + productVO.priceTo.toString());
+        holder.imgUrl = productVO.imageUrl;
+
+        new ImageDownloader(holder.imgProductIcon).execute(productVO.imageUrl);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
