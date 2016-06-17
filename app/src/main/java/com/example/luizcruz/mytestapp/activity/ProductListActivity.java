@@ -6,7 +6,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.luizcruz.mytestapp.R;
+import com.example.luizcruz.mytestapp.SimpleDividerItemDecoration;
 import com.example.luizcruz.mytestapp.data.ProductListAdapter;
+import com.example.luizcruz.mytestapp.data.vo.ProductVO;
+
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ProductListActivity extends Activity {
 
@@ -29,8 +37,28 @@ public class ProductListActivity extends Activity {
         mProdutListLayoutManager = new LinearLayoutManager(this);
         mProductListView.setLayoutManager(mProdutListLayoutManager);
 
+        //
+        mProductListView.addItemDecoration(new SimpleDividerItemDecoration(
+                getApplicationContext()
+        ));
+
         // specify an adapter (see also next example)
-        mProductListAdapter = new ProductListAdapter(myDataset);
+        mProductListAdapter = new ProductListAdapter(getDummyDataset());
         mProductListView.setAdapter(mProductListAdapter);
     }
+
+
+    private List<ProductVO> getDummyDataset(){
+        List<ProductVO> testProducts = new ArrayList<>();
+
+        for (int index = 1; index < 101; index++) {
+            testProducts.add(new ProductVO("Produto " + index,
+                                            BigDecimal.valueOf(50),
+                                            BigDecimal.valueOf(50)));
+        }
+
+        return testProducts;
+    }
+
+
 }
