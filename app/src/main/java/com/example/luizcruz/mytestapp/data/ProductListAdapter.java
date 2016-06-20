@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.luizcruz.mytestapp.R;
-import com.example.luizcruz.mytestapp.controller.ImageDownloader;
 import com.example.luizcruz.mytestapp.data.vo.ProductVO;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -66,7 +66,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.mTxtPriceTo.setText("R$ " + productVO.priceTo.toString());
         holder.imgUrl = productVO.imageUrl;
 
-        new ImageDownloader(holder.imgProductIcon).execute(productVO.imageUrl);
+        Picasso.with(holder.imgProductIcon.getContext())
+                .load(productVO.imageUrl)
+                .into(holder.imgProductIcon);
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
